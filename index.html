@@ -212,6 +212,7 @@ a[1] --> 1
 #a --> 3
 a[#a + 1] = 4 -- extend array
 #a --> 4
+table.concat(a, ", ") --> "1, 2, 3"
 </pre>
 </div></section>
 
@@ -312,15 +313,101 @@ tab:setname("Justin")
 		<h2>Wiki templates</h2>
 	</div></section>
 
+<section class="slide"><div>
+<h2>Wiki templates</h2>
+<p>In a Wikipedia page you have text and then you have templates to do all the formatting, complex functionality.
+<pre class="prettyprint">
+{{Infobox musical artist
+| name       = Nyusha Shurochkina
+| image        =
+| years_active    = 2007–present
+| background      = solo_singer
+...
+}}
+</pre>
+</div></section>
 
+<section class="slide"><div>
+<h2>Wiki templates</h2>
+<p>This will render out the infobox</p>
+<img src="pictures/infobox.png">
+</div></section>
 
+<section class="slide"><div>
+<h2>Wiki templates</h2>
+<pre class="tiny">
+{{{2|}}}{{
+#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}4 }}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}6 }}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}8 }}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}9 }}
+| 9
+| 8
+}}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}7 }}
+| 7
+| 6
+}}
+}}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}5 }}
+| 5
+| 4
+}}
+}}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}2 }}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}3 }}
+| 3
+| 2
+}}
+| {{#ifeq: {{{1|}}} | {{padleft:{{{1|}}}| {{{2|}}}1 }}
+| 1
+| 0
+}}
+}}
+}}
+</pre>
+</div></section>
 
+<section class="slide"><div>
+<h2>Scribunto Lua templates</h2>
+<p>Call with #invoke or wrap in a standard template
+<pre class="prettyprint">
+{{#invoke:MyLuaTemplate|function|name=Justin|url=http://en.wikipedia.org/}}
+</pre>
+</div></section>
+
+<section class="slide"><div>
+<h2>A template is a Lua module</h2>
+<pre class="prettyprint">
+local m = {
+  function1 = function(frame)
+    name = frame.args.name or "unknown"
+    return "Hello from Lua " .. name
+  end,
+}
+return m
+</pre>
+</div></section>
+
+	<section class="slide shout"><div>
+		<h2>Getting started</h2>
+	</div></section>
+
+<section class="slide"><div>
+<h2>Getting started</h2>
+<ol>
+<li>Create a Wikipedia account if you do not have one.
+<li>Create a test Lua module at Module:Sandbox/Username/Modulename
+<li>Try it out in your user sandbox
+</ol>
+<p>From now we are going to go live...
+</div></section>
 
 
 	<section class="slide shout" id="SeeMore"><div>
-		<h2><img src="pictures/logo.svg" alt=""> <a href="https://github.com/shower/shower/">See more on GitHub</a></h2>
+		<h2><a href="https://github.com/justincormack/luawikitalk/">Slides on GitHub</a></h2>
 	</div></section>
-	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+	<p class="badge"><a href="https://github.com/justincormack/luawikitalk">Fork me on Github</a></p>
 	<!--
 		To hide progress bar from entire presentation
 		just remove “progress” element.
